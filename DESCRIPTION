@@ -1,0 +1,9 @@
+Package: robR
+Type: Package
+Title: Rob's random collection of functions.
+Version: 1.1
+Date: 2015-2-20
+Author: Robert S. Chavez
+Maintainer: Robert Chavez <robert.s.chavez.GR@dartmouth.edu>
+Description: Functions for easy ggplot2 bar graphs, quick correlations, Simpsons, and more.
+License: "Unlimited"
