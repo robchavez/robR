@@ -6,6 +6,8 @@ The most useful function for most will be ggbar.maker(): a simple helper functio
 
 To install, you will need the "devtools" package installed before downloading from GitHub.
 ```{r,warning=FALSE,message=FALSE}
+
+# Requires devtools version 1.7.0 or greater
 install.packages("devtools")
 devtools::install_github("robchavez/robR")
 ```
