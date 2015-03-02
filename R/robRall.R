@@ -18,11 +18,15 @@ ggbar.maker <- function (dv, groups, factor = NULL, id = NULL, groups_between=FA
       df <- data.frame(mean, se, fact, eb_h, eb_l)
       labx <- deparse(substitute(groups))
       laby <- deparse(substitute(dv))
-      ggplot(df, aes(fact, mean, fill = fact)) + geom_bar(position = position_dodge(0.9), 
-                                                          stat = "identity", colour = "black", size = 0.5) + 
-        theme(legend.position = "none") + scale_fill_brewer(palette = palette) + 
-        geom_errorbar(ymax = eb_h, ymin = eb_l, size = 0.5, 
-                      width = 0.3) + xlab(labx) + ylab(laby)
+      ggplot(df, aes(fact, mean, fill = fact)) +
+      geom_bar(position = position_dodge(0.9),
+               stat = "identity", colour = "black", size = 0.5) +
+      theme(legend.position = "none") + scale_fill_brewer(palette = palette) +
+      geom_errorbar(ymax = eb_h,
+                    ymin = eb_l,
+                    size = 0.5,
+                    width = 0.3) +
+      xlab(labx) + ylab(laby)
     }
     else {
       factor2 <- as.factor(factor)
@@ -32,13 +36,20 @@ ggbar.maker <- function (dv, groups, factor = NULL, id = NULL, groups_between=FA
       df$eb_l <- as.numeric(df$x - df$se)
       labx <- deparse(substitute(groups))
       laby <- deparse(substitute(dv))
-      ggplot(df, aes(Group.1, x, fill = Group.2)) + geom_bar(position = position_dodge(0.9), 
-                                                             stat = "identity", size = 0.5) + geom_bar(position = position_dodge(0.9), 
-                                                                                                       stat = "identity", colour = "black", size = 0.5, 
-                                                                                                       show_guide = FALSE) + scale_fill_brewer(palette = palette) + 
-        geom_errorbar(aes(ymin = eb_l, ymax = eb_h), size = 0.5, 
-                      width = 0.3, position = position_dodge(0.9)) + 
-        xlab(labx) + ylab(laby) + guides(fill = guide_legend(title = deparse(substitute(factor))))
+      ggplot(df, aes(Group.1, x, fill = Group.2)) +
+      geom_bar(position = position_dodge(0.9),
+               stat = "identity", size = 0.5) +
+      geom_bar(position = position_dodge(0.9),
+               stat = "identity", colour = "black", size = 0.5,
+               show_guide = FALSE) +
+      scale_fill_brewer(palette = palette) +
+      geom_errorbar(aes(ymin = eb_l, ymax = eb_h),
+                    size = 0.5,
+                    width = 0.3,
+                    position = position_dodge(0.9)) +
+      xlab(labx) +
+      ylab(laby) +
+      guides(fill = guide_legend(title = deparse(substitute(factor))))
     }
   }
   else {
@@ -54,11 +65,16 @@ ggbar.maker <- function (dv, groups, factor = NULL, id = NULL, groups_between=FA
         df <- data.frame(mean, se, fact, eb_h, eb_l)
         labx <- deparse(substitute(groups))
         laby <- deparse(substitute(dv))
-        ggplot(df, aes(fact, mean, fill = fact)) + geom_bar(position = position_dodge(0.9), 
-                                                            stat = "identity", colour = "black", size = 0.5) + 
-          theme(legend.position = "none") + scale_fill_brewer(palette = palette) + 
-          geom_errorbar(ymax = eb_h, ymin = eb_l, size = 0.5, 
-                        width = 0.3) + xlab(labx) + ylab(laby)
+        ggplot(df, aes(fact, mean, fill = fact)) +
+        geom_bar(position = position_dodge(0.9),
+                 stat = "identity",
+                 colour = "black",
+                 size = 0.5) +
+          theme(legend.position = "none") +
+          scale_fill_brewer(palette = palette) +
+          geom_errorbar(ymax = eb_h, ymin = eb_l, size = 0.5, width = 0.3) +
+          xlab(labx) +
+          ylab(laby)
       }
       else{
         print("Using within-subject 95% confidence interval error bars")
@@ -87,11 +103,22 @@ ggbar.maker <- function (dv, groups, factor = NULL, id = NULL, groups_between=FA
         laby <- deparse(substitute(dv))
         lab_fac <- deparse(substitute(factor))
         
-        ggplot(dfwc,aes(groups, dv, fill=factor)) +  
-          geom_bar(position= position_dodge(), stat="identity", size= 0.5) +
-          geom_bar(position= position_dodge(), stat="identity",color="black", size= 0.5,show_guide = FALSE) + 
-          scale_fill_brewer(palette = palette, name =lab_fac) +  geom_errorbar(aes(ymin=dv-ci, ymax=dv+ci),width=.3, size = .3, position=position_dodge(.9)) +
-          xlab(labx) + ylab(laby)
+        ggplot(dfwc,aes(groups, dv, fill=factor)) +
+          geom_bar(position = position_dodge(),
+                   stat = "identity",
+                   size = 0.5) +
+          geom_bar(position = position_dodge(),
+                   stat = "identity",
+                   color = "black",
+                   size = 0.5,
+                   show_guide = FALSE) +
+          scale_fill_brewer(palette = palette, name =lab_fac) +
+          geom_errorbar(aes(ymin = dv-ci, ymax = dv + ci),
+                        width=.3,
+                        size = .3,
+                        position=position_dodge(.9)) +
+          xlab(labx) +
+          ylab(laby)
       }
       else {
         require(plyr)
@@ -102,11 +129,22 @@ ggbar.maker <- function (dv, groups, factor = NULL, id = NULL, groups_between=FA
         laby <- deparse(substitute(dv))
         lab_fac <- deparse(substitute(factor))
         
-        ggplot(dfwc,aes(groups, dv, fill=factor)) +  
-          geom_bar(position= position_dodge(), stat="identity", size= 0.5) +
-          geom_bar(position= position_dodge(), stat="identity",color="black", size= 0.5,show_guide = FALSE) + 
-          scale_fill_brewer(palette = palette, name=lab_fac ) +  geom_errorbar(aes(ymin=dv-ci, ymax=dv+ci),width=.3, size = .3, position=position_dodge(.9)) +
-          xlab(labx) + ylab(laby)
+        ggplot(dfwc, aes(groups, dv, fill=factor)) +
+          geom_bar(position = position_dodge(),
+                   stat = "identity",
+                   size = 0.5) +
+          geom_bar(position= position_dodge(),
+                   stat = "identity",
+                   color = "black",
+                   size = 0.5,
+                   show_guide = FALSE) +
+          scale_fill_brewer(palette = palette, name = lab_fac) +
+          geom_errorbar(aes(ymin = dv-ci, ymax = dv+ci),
+                        width =.3,
+                        size = .3,
+                        position = position_dodge(.9)) +
+          xlab(labx) +
+          ylab(laby)
       }
     }
   }
@@ -138,14 +176,20 @@ sobel.lovez <- function (pred, med, out, plab="", mlab="", olab="", sbeta=FALSE)
   mod3.out <- summary(model3)$coef
   mod4.out <- summary(model4)$coef
   indir <- mod3.out[2, 1] * mod2.out[3, 1]
-  effvar <- (mod3.out[2, 1])^2 * (mod2.out[3, 2])^2 + (mod2.out[3, 
-                                                                1])^2 * (mod3.out[2, 2])^2
+  effvar <- (mod3.out[2, 1])^2 * (mod2.out[3, 2])^2 
+          + (mod2.out[3, 1])^2 * (mod3.out[2, 2])^2
   serr <- sqrt(effvar)
   zvalue = indir/serr
   pvalue = (1- pnorm(abs(zvalue))) * 2
   pvalue3 <- format(pvalue, digits=2)
-  out <- list(Model.1.out.pred = mod1.out, Model.2.out.pred.med = mod2.out, Model.3.med.pred = mod3.out, Model.4.med.out = mod4.out,
-              Indirect.Effect = indir, SE = serr, z.value = zvalue, p.value = pvalue,
+  out <- list(Model.1.out.pred = mod1.out, 
+              Model.2.out.pred.med = mod2.out,
+              Model.3.med.pred = mod3.out,
+              Model.4.med.out = mod4.out,
+              Indirect.Effect = indir, 
+              SE = serr,
+              z.value = zvalue,
+              p.value = pvalue,
               N = nrow(NEWDAT))
   
   #Unstandardized beta coefficients
@@ -428,4 +472,22 @@ normDataWithin <- function(data=NULL, idvar, measurevar, betweenvars=NULL,
   data$subjMean <- NULL
   
   return(data)
+}
+
+###########################################################
+myjekyllsite = c("http://somethingsomething.com")
+KnitJekyll <- function(input, base.url = myjekyllsite) {
+  # tells knitr to play nice when compiling Jekyll posts
+  # Args: 
+  #   input: an .Rmd file
+  #   base.url: the url for your jekyll site. Defaults to variable set above
+  #             function.
+  require(knitr)
+  opts_knit$set(base.url = base.url)
+  # set this figure path string as needed
+  fig.path <- paste0("figure/", sub(".Rmd$", "", basename(input)), "/")
+  opts_chunk$set(fig.path = fig.path)
+  opts_chunk$set(fig.cap = "center")
+  render_jekyll()
+  knit(input, envir = parent.frame())
 }
