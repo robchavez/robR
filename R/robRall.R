@@ -347,7 +347,7 @@ qcor.rob <- function (x, y)
   modelout <- summary(model)
   corout <- cor(x,y,use="complete.obs")
   out <- list(modelout, corout, pl)
-  return(out)
+  print(out)
   
 }
 
